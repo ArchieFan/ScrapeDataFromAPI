@@ -12,24 +12,24 @@ namespace ScrapeDataFromAPI
     internal class HttpClientApp
     {
 
-        static async Task Main()
+        static void Main(string[] args)
         {
             var clientapp = new HttpClientApp();
-            var responseBody = await clientapp.GetResponse();
+            var responseBody = clientapp.GetResponse().Result;
             //var jsonString = "{\n    \"Meta Data\": {\n        \"1. Information\": \"Intraday (5min) open, high, low, close prices and volume\",\n        \"2. Symbol\": \"IBM\",\n        \"3. Last Refreshed\": \"2022-08-18 18:10:00\"\n  }}";
             //Console.WriteLine(responseBody);
-            var data = JsonConvert.DeserializeObject<Time_Series_Intraday>(responseBody);
+            var json_data = JsonConvert.DeserializeObject<Time_Series_Intraday>(responseBody);
             //Console.WriteLine(data.MetaData._1Information);
             //Console.WriteLine(data.MetaData._2Symbol);
             //Console.WriteLine(data.MetaData._3LastRefreshed);
             //Console.WriteLine(data.MetaData._4Interval);
             //Console.WriteLine(data.MetaData._5OutputSize);
-            foreach (var item in data.MetaData)
+            foreach (var item in json_data.MetaData)
             {
                 Console.WriteLine(item.Key);
                 Console.WriteLine(item.Value);
             }
-            foreach (var item in data.TimeSeries5min)
+            foreach (var item in json_data.TimeSeries5min)
             {
                 Console.WriteLine(item.Key);
                 Console.WriteLine(item.Value._1open);

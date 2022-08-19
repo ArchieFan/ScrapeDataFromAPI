@@ -48,6 +48,20 @@ namespace ScrapeDataFromAPI
                 //dynamic json_data = JsonSerializer.Deserialize<Dictionary<string, dynamic>>(client.DownloadString(queryUri));
 
                 // -------------------------------------------------------------------------
+                foreach (var item in json_data.MetaData)
+                {
+                    Console.WriteLine(item.Key);
+                    Console.WriteLine(item.Value);
+                }
+                foreach (var item in json_data.TimeSeries5min)
+                {
+                    Console.WriteLine(item.Key);
+                    Console.WriteLine(item.Value._1open);
+                    Console.WriteLine(item.Value._2high);
+                    Console.WriteLine(item.Value._3low);
+                    Console.WriteLine(item.Value._4close);
+                    Console.WriteLine(item.Value._5volume);
+                }
                 Console.ReadLine();
                 // do something with the json_data
             }
